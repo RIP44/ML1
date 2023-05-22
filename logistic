@@ -1,0 +1,32 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+data = pd.read_csv(r'User_Data.csv')
+data.head()
+
+X = df.iloc[:, [2,3]].values
+Y = df.iloc[:, 4].values
+
+from sklearn.model_selection import train_test_split
+X_Train, X_Test, Y_Train, Y_Test = train_test_split(X, Y, test_size = 0.25, random_state = 0)
+
+from sklearn.preprocessing import StandardScaler
+sc_X = StandardScaler()
+X_Train = sc_X.fit_transform(X_Train)
+X_Test = sc_X.transform(X_Test)
+from sklearn.linear_model import LogisticRegression
+classifier = LogisticRegression(random_state = 0)
+classifier.fit(X_Train, Y_Train)
+Y_Pred = classifier.predict(X_Test)
+Y_Pred
+
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(Y_Test, Y_Pred)
+cm
+
+from sklearn.metrics import accuracy_score
+print("accuracy:",accuracy_score(Y_Test, Y_Pred))
+from sklearn.metrics import accuracy_score
+print("precision:",precision_score(Y_Test,Y_Pred))
+from sklearn.metrics import recall_score
+print("recall:",recall_score(Y_Test,Y_Pred))
