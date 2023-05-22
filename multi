@@ -1,0 +1,30 @@
+import pandas as pd
+import numpy as np
+data=pd.read_csv(r'50_Startups.csv')
+data.head()
+data.describe()
+
+x=data[['R&D Spend','Administration','Marketing Spend']]
+y=data['Profit']
+print(x)
+print(y)
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
+
+from sklearn.linear_model import LinearRegression
+regressor=LinearRegression()
+regressor.fit(x_train,y_train)
+print(regressor.intercept_)
+print(regressor.coef_)
+y_pred=regressor.predict(x_test)
+print(y_test)
+print(y_pred)
+
+df=pd.DataFrame({'Actual':y_test,'Predict':y_pred})
+df
+
+from sklearn import metrics
+print('Mean absolute error',metrics.mean_absolute_error(y_test,y_pred))
+print('Mean squared error',metrics.mean_squared_error(y_test,y_pred))
+print('Root mean squared error',np.sqrt(metrics.mean_squared_error(y_test,y_pred)))
