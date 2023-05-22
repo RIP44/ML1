@@ -12,9 +12,9 @@ from sklearn.model_selection import train_test_split
 xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=0.3, random_state=0)
 
 from sklearn.preprocessing import StandardScaler  
-sc_x = StandardScaler()
-xtrain = sc_x.fit_transform(xtrain)
-xtest = sc_x.transform(xtest)
+sc = StandardScaler()
+xtrain = sc.fit_transform(xtrain)
+xtest = sc.transform(xtest)
 
 from sklearn.ensemble import RandomForestClassifier  
 classifier = RandomForestClassifier(n_estimators=10,criterion='entropy')
