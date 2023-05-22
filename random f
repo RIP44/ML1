@@ -1,0 +1,33 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+dataset = pd.read_csv(r'User_Data.csv')
+dataset.head()
+dataset.describe()
+
+x = dataset.iloc[:, [2, 3]].values
+y = dataset.iloc[:, 4].values
+
+from sklearn.model_selection import train_test_split  
+xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=0.3, random_state=0)
+
+from sklearn.preprocessing import StandardScaler  
+sc_x = StandardScaler()
+xtrain = sc_x.fit_transform(xtrain)
+xtest = sc_x.transform(xtest)
+
+from sklearn.ensemble import RandomForestClassifier  
+classifier = RandomForestClassifier(n_estimators=10,criterion='entropy')
+classifier.fit(xtrain, ytrain)
+y_pred = classifier.predict(xtest)
+
+from sklearn import metrics  
+cm = confusion_matrix(ytest, y_pred)
+print ("Confusion Matrix : \n", cm)
+
+from sklearn.metrics import accuracy_score  
+print ("Accuracy : ", accuracy_score(ytest, y_pred))
+from sklearn.metrics import precision_score  
+print ("precision : ", precision_score(ytest, y_pred))
+from sklearn.metrics import recall_score  
+print ("recall : ", recall_score(ytest, y_pred))
