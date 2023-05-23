@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 data = pd.read_csv(r'User_Data.csv')
 data.head()
 
-X = df.iloc[:, [2,3]].values
-Y = df.iloc[:, 4].values
+X = data.iloc[:, [2,3]].values
+Y = data.iloc[:, 4].values
 
 from sklearn.model_selection import train_test_split
 X_Train, X_Test, Y_Train, Y_Test = train_test_split(X, Y, test_size = 0.25, random_state = 0)
